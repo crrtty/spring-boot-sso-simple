@@ -1,7 +1,7 @@
 package com.ly.controller;
 
 import com.ly.service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 @RequestMapping("/sso")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private LoginService loginService;
+    private final LoginService loginService;
 
     @GetMapping("/login")
     public String login(){
@@ -34,5 +34,11 @@ public class AuthController {
     @ResponseBody
     public boolean checkJwt(String token){
         return loginService.checkJwt(token);
+    }
+
+    @GetMapping("/logout")
+    @ResponseBody
+    public boolean logout(String uid){
+        return loginService.logout(uid);
     }
 }
