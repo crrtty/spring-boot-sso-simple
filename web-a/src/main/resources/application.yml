@@ -6,4 +6,7 @@ spring:
     name: web-a-service
 
 sso:
-  server: http://localhost:8080/sso
+  domain: http://localhost:8080/sso
+  clientId: web-a
+local:
+  domain: http://localhost:8081

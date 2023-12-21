@@ -6,4 +6,7 @@ spring:
     name: web-b-service
 
 sso:
-  server: http://localhost:8080/sso
+  domain: http://localhost:8080/sso
+  clientId: web-b
+local:
+  domain: http://localhost:8082

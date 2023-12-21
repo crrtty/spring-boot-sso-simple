@@ -1,9 +1,0 @@
-server:
-  port: 8081
-
-spring:
-  application:
-    name: web-a-service
-
-sso:
-  server: http://localhost:8080/sso

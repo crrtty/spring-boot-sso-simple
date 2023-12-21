@@ -16,6 +16,11 @@ spring:
         min-idle: 0
       shutdown-timeout: 6000
     timeout: 60000
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
 
 jwt:
   secret: 123456
