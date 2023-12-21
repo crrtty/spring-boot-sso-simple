@@ -15,11 +15,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.time.Duration;
-import java.util.Objects;
 
 /**
  * @author robben
@@ -33,26 +31,10 @@ public class LoginService {
     private String secret;
     @Value("${jwt.ssoUrl:http://localhost:8080/sso/login}")
     private String ssoUrl;
-//    @Value("${jwt.expire:86400}")
-    @Value("${jwt.expire:300}")
+    @Value("${jwt.expire:86400}")
+//    @Value("${jwt.expire:300}")
     private long expireTime;
     private final RedisTemplate<String, Object> redisTemplate;
-
-    public String preLogin(HttpServletRequest request){
-        String redirectUrl = request.getParameter("redirectUrl");
-        String setCookieURL = request.getParameter("setCookieURL");
-        String clientId = request.getParameter("clientId");
-        Cookie cookie = ServletUtil.getCookie(request, "token");
-        String token = Objects.isNull(cookie)?null:cookie.getValue();
-        String ssoServerURL = ssoUrl + "?setCookieURL="+setCookieURL+"&redirectUrl="+redirectUrl;
-        if (StringUtils.isNotBlank(token) && StringUtils.isNotBlank(clientId)){
-            //校验token是否有效，有效则设置客户端cookie
-            if (this.checkJwt(token, clientId) && StringUtils.isNotBlank(setCookieURL)){
-                return setCookieURL + "?token=" + token + "&redirectUrl=" + redirectUrl;
-            }
-        }
-        return ssoServerURL;
-    }
 
     public String login(LoginVo loginVo, HttpServletRequest request, HttpServletResponse response){
         if (StringUtils.isBlank(loginVo.getUsername()) || StringUtils.isBlank(loginVo.getPassword())){

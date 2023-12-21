@@ -55,7 +55,7 @@ public class LoginFilter implements Filter {
 
     private void logout(String token, String clientId){
         //如果对返回结果有依赖可自行扩充
-        HttpUtil.post(serverHost + "/check", ImmutableMap.of("token", token, "clientId", clientId), 2000);
+        HttpUtil.post(serverHost + "/logout", ImmutableMap.of("token", token, "clientId", clientId), 2000);
     }
 
     private void setCookie(HttpServletRequest request, HttpServletResponse response) throws IOException {

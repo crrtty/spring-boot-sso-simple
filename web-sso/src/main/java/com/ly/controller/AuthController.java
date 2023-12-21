@@ -35,16 +35,6 @@ public class AuthController {
     }
 
     /**
-     * 预登录，校验用户是否已登录，未登录跳转统一登录页面，已登录设置客户端cookie后重定向回客户端页面
-     * @param request
-     * @return
-     */
-    @GetMapping("/preLogin")
-    public String preLogin(HttpServletRequest request){
-        return "redirect:" + loginService.preLogin(request);
-    }
-
-    /**
      * 统一登录
      * @return
      */
